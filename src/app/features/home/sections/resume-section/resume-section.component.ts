@@ -84,6 +84,6 @@ export class ResumeSectionComponent {
     },
   ];
 
-  protected readonly resumeFileName = 'resume-english.pdf';
+  protected readonly resumeFileName = 'my Resume';
   protected readonly resumeUrl = '/assets/resume-english.pdf';
 }

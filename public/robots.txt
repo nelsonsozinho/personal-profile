@@ -1,0 +1,27 @@
+# Robots.txt for nelsonsozinho.dev
+# https://developers.google.com/search/docs/beginner/robots-txt
+
+User-agent: *
+Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.sass$
+
+# Google Search Console and other crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Specific bot restrictions (uncomment if needed)
+# User-agent: AhrefsBot
+# Disallow: /
+
+# Sitemap location
+Sitemap: https://nelsonsozinho.dev/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
+

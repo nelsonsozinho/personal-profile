@@ -16,16 +16,16 @@ export class PortfolioStatsSectionComponent {
 
   protected readonly stats: PortfolioStat[] = [
     {
-      value: '10+',
-      label: 'Years in development',
+      value: '15+',
+      label: 'Years of experience in software development',
     },
     {
-      value: '500+',
-      label: 'Clients',
+      value: '50+',
+      label: 'Github projects',
     },
     {
-      value: '1k+',
-      label: 'Completed projects',
+      value: '6+',
+      label: 'Years of experience with cloud products',
     },
   ];
 }
