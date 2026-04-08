@@ -1,0 +1,19 @@
+<main class="home-page">
+  <div class="home-page__actions">
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-label]="themeService.isDark() ? 'Enable light mode' : 'Enable dark mode'"
+    >
+      {{ themeService.isDark() ? 'Light mode' : 'Dark mode' }}
+    </button>
+  </div>
+
+  <app-presentation-section />
+
+  <a class="resume-link" routerLink="/resume">Resume</a>
+
+  <app-projects-section />
+</main>
+

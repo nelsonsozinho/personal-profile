@@ -1,0 +1,18 @@
+<section class="resume" aria-labelledby="resume-title">
+  <div class="resume__header">
+    <h2 id="resume-title">{{ title }}</h2>
+    <p>{{ summary }}</p>
+  </div>
+
+  <ul class="resume__highlights">
+    @for (item of highlights; track item) {
+      <li>{{ item }}</li>
+    }
+  </ul>
+
+  <div class="resume__actions">
+    <a class="resume__download" [href]="resumeUrl" download>
+      Download {{ resumeFileName }}
+    </a>
+  </div>
+</section>
