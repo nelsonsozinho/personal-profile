@@ -42,3 +42,51 @@
 
 .resume__download:hover
   opacity: 0.9
+
+.resume__experience
+  display: flex
+  flex-direction: column
+  gap: 0.9rem
+
+.resume__experience h3
+  color: var(--text-primary)
+  font-size: 1.35rem
+  margin: 0
+
+.resume__experience-grid
+  display: grid
+  gap: 0.9rem
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+
+.experience-card
+  background: color-mix(in srgb, var(--card-bg) 88%, var(--tag-bg))
+  border: 1px solid var(--border-color)
+  border-radius: 12px
+  display: flex
+  flex-direction: column
+  gap: 0.75rem
+  padding: 0.9rem
+
+.experience-card h4
+  color: var(--text-primary)
+  font-size: 1rem
+  margin: 0
+
+.experience-card__time
+  color: var(--brand-color)
+  font-size: 0.9rem
+  font-weight: 600
+  margin: 0
+
+.experience-card__techs
+  display: flex
+  flex-wrap: wrap
+  gap: 0.45rem
+
+.experience-card__techs span
+  background: var(--tag-bg)
+  border-radius: 999px
+  color: var(--tag-text)
+  font-size: 0.78rem
+  font-weight: 600
+  padding: 0.25rem 0.55rem

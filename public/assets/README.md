@@ -15,3 +15,15 @@ Public URL:
 ```
 /assets/resume-english.pdf
 ```
+
+## Profile picture
+
+The home page profile card currently uses:
+
+```
+public/assets/profile-placeholder.svg
+```
+
+You can replace it with your own image and update the path in:
+
+- `src/app/features/home/sections/presentation-section/presentation-section.component.ts`

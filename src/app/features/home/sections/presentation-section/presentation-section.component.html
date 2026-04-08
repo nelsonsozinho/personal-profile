@@ -1,7 +1,36 @@
 <section class="presentation" aria-labelledby="presentation-title">
-  <p class="presentation__intro">Hello, I am</p>
-  <h1 id="presentation-title">{{ name }}</h1>
-  <p class="presentation__role">{{ role }}</p>
-  <p class="presentation__bio">{{ shortBio }}</p>
-</section>
+  <aside class="profile-card" aria-label="Profile card">
+    <img
+      class="profile-card__photo"
+      [src]="photoUrl"
+      [alt]="name + ' profile picture'"
+    />
 
+    <div class="profile-card__identity">
+      <h2>{{ name }}</h2>
+      <p class="profile-card__role">{{ role }}</p>
+      <a class="profile-card__email" [href]="contactUrl">{{ email }}</a>
+    </div>
+
+    <div class="profile-card__links">
+      <a [href]="linkedinUrl" target="_blank" rel="noopener">LinkedIn</a>
+      <a [href]="githubUrl" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <div class="profile-card__actions">
+      <a class="profile-card__button profile-card__button--secondary" routerLink="/resume">
+        View my CV
+      </a>
+      <a class="profile-card__button profile-card__button--primary" [href]="contactUrl">
+        Contact me
+      </a>
+    </div>
+  </aside>
+
+  <div class="presentation__content">
+    <p class="presentation__intro">Hello, I am</p>
+    <h1 id="presentation-title">{{ name }}</h1>
+    <p class="presentation__role">{{ role }}</p>
+    <p class="presentation__bio">{{ shortBio }}</p>
+  </div>
+</section>

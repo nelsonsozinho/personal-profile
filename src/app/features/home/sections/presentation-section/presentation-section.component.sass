@@ -1,28 +1,121 @@
 .presentation
+  align-items: start
+  display: grid
+  gap: 2rem
+  grid-template-columns: minmax(260px, 320px) 1fr
+
+.profile-card
+  background: var(--card-bg)
+  border: 1px solid var(--border-color)
+  border-radius: 24px
+  display: flex
+  flex-direction: column
+  gap: 1.25rem
+  padding: 1.25rem
+
+.profile-card__photo
+  aspect-ratio: 4 / 5
+  border-radius: 20px
+  display: block
+  object-fit: cover
+  width: 100%
+
+.profile-card__identity
+  display: flex
+  flex-direction: column
+  gap: 0.35rem
+
+.profile-card__identity h2
+  color: var(--text-primary)
+  font-size: 1.6rem
+  margin: 0
+
+.profile-card__role
+  color: var(--brand-color)
+  font-size: 0.95rem
+  font-weight: 700
+  margin: 0
+  text-transform: uppercase
+
+.profile-card__email
+  color: var(--text-primary)
+  font-weight: 600
+  text-decoration: none
+
+.profile-card__email:hover
+  text-decoration: underline
+
+.profile-card__links
+  display: flex
+  flex-wrap: wrap
+  gap: 0.75rem
+
+.profile-card__links a
+  background: var(--tag-bg)
+  border-radius: 999px
+  color: var(--tag-text)
+  font-size: 0.9rem
+  font-weight: 600
+  padding: 0.45rem 0.8rem
+  text-decoration: none
+
+.profile-card__links a:hover
+  opacity: 0.9
+
+.profile-card__actions
   display: flex
   flex-direction: column
   gap: 0.75rem
 
+.profile-card__button
+  border-radius: 999px
+  font-weight: 700
+  padding: 0.8rem 1rem
+  text-align: center
+  text-decoration: none
+
+.profile-card__button--secondary
+  background: var(--tag-bg)
+  border: 1px solid var(--border-color)
+  color: var(--text-primary)
+
+.profile-card__button--primary
+  background: var(--brand-color)
+  color: #ffffff
+
+.presentation__content
+  display: flex
+  flex-direction: column
+  gap: 0.75rem
+  padding-top: 1rem
+
 .presentation__intro
   color: var(--text-secondary)
-  font-weight: 600
+  font-weight: 700
   margin: 0
 
 h1
   color: var(--text-primary)
-  font-size: clamp(2rem, 6vw, 3rem)
-  line-height: 1.1
+  font-size: clamp(2.5rem, 8vw, 4.5rem)
+  line-height: 1.05
   margin: 0
 
 .presentation__role
   color: var(--brand-color)
-  font-size: 1.1rem
-  font-weight: 600
+  font-size: 1.5rem
+  font-weight: 700
   margin: 0
 
 .presentation__bio
   color: var(--text-secondary)
-  font-size: 1rem
-  line-height: 1.6
+  font-size: 1.1rem
+  line-height: 1.7
   margin: 0
-  max-width: 72ch
+  max-width: 60ch
+
+@media (max-width: 900px)
+  .presentation
+    grid-template-columns: 1fr
+
+  .presentation__content
+    padding-top: 0

@@ -1,0 +1,10 @@
+<svg width="480" height="560" viewBox="0 0 480 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="480" height="560" rx="32" fill="#1E293B"/>
+  <rect x="24" y="24" width="432" height="512" rx="28" fill="#0F172A"/>
+  <circle cx="240" cy="200" r="92" fill="#334155"/>
+  <path d="M240 128C208.6 128 183 153.6 183 185C183 216.4 208.6 242 240 242C271.4 242 297 216.4 297 185C297 153.6 271.4 128 240 128Z" fill="#94A3B8"/>
+  <path d="M240 266C177.6 266 127 316.6 127 379V398H353V379C353 316.6 302.4 266 240 266Z" fill="#94A3B8"/>
+  <text x="240" y="474" text-anchor="middle" fill="#E2E8F0" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">Nelson Sozinho</text>
+  <text x="240" y="512" text-anchor="middle" fill="#93C5FD" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600">Backend Engineer</text>
+</svg>
+

@@ -15,4 +15,23 @@
       Download {{ resumeFileName }}
     </a>
   </div>
+
+  <section class="resume__experience" aria-labelledby="experience-title">
+    <h3 id="experience-title">Companies I Worked With</h3>
+
+    <div class="resume__experience-grid">
+      @for (experience of experiences; track experience.company + experience.timeWorked) {
+        <article class="experience-card">
+          <h4>{{ experience.company }}</h4>
+          <p class="experience-card__time">{{ experience.timeWorked }}</p>
+
+          <div class="experience-card__techs">
+            @for (tech of experience.technologies; track tech) {
+              <span>{{ tech }}</span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </section>
 </section>

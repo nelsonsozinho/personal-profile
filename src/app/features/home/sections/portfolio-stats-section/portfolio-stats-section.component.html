@@ -1,0 +1,13 @@
+<section class="portfolio-stats" aria-labelledby="portfolio-stats-title">
+  <h2 id="portfolio-stats-title">{{ title }}</h2>
+
+  <div class="portfolio-stats__grid">
+    @for (stat of stats; track stat.label) {
+      <article class="portfolio-stat-card">
+        <p class="portfolio-stat-card__value">{{ stat.value }}</p>
+        <p class="portfolio-stat-card__label">{{ stat.label }}</p>
+      </article>
+    }
+  </div>
+</section>
+
