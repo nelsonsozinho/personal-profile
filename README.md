@@ -12,6 +12,24 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Docker
+
+A production Docker image is available for the SSR app.
+
+Build the image:
+
+```bash
+docker build -t personal-profile:local .
+```
+
+Run the container:
+
+```bash
+docker run --rm -p 4000:4000 personal-profile:local
+```
+
+Then open `http://localhost:4000/`.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
