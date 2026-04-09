@@ -12,6 +12,14 @@ import { join } from 'node:path';
 const browserDistFolder = join(import.meta.dirname, '../browser');
 const NODE_ENV = process.env['NODE_ENV'] || 'development';
 const port = parseInt(process.env['PORT'] || '4000', 10);
+const enableUpgradeInsecureRequests = process.env['ENABLE_UPGRADE_INSECURE_REQUESTS'] === 'true';
+
+// Angular SSR emits two inline bootstrap scripts for event replay in the prerendered HTML.
+// Keep CSP strict by allowing only their known hashes instead of enabling full unsafe-inline.
+const angularInlineScriptHashes = [
+  "'sha256-VM2mZqyEQZoLzoTrp5EigFvzQ0+f1wSeBuoOn95WHCg='",
+  "'sha256-8sGKvDKC8crv9OBcqEMvqrNDWlm1/80h7NJpJzqOnLI='",
+];
 
 // Validate required environment variables
 function validateEnvironment(): void {
@@ -74,13 +82,18 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
+        scriptSrc: ["'self'", ...angularInlineScriptHashes],
+        // Angular-generated preload stylesheet uses an inline onload attribute.
+        scriptSrcAttr: ["'unsafe-inline'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", 'data:', 'https:'],
         fontSrc: ["'self'", 'https:'],
         connectSrc: ["'self'", apiUrl],
         frameSrc: ["'none'"],
         objectSrc: ["'none'"],
+        // Opt-in only: enabling this over plain HTTP can prevent client scripts from loading.
+        upgradeInsecureRequests:
+          NODE_ENV === 'production' && enableUpgradeInsecureRequests ? [] : null,
       },
     },
     hsts: {
