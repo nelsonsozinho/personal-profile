@@ -35,10 +35,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build da imagem Docker
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/minha-app:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/personal-profile:latest .
 
       - name: Push da imagem
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/minha-app:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/personal-profile:latest
 
       - name: Deploy no VPS
         uses: appleboy/ssh-action@v1.0.0
@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/minha-app:latest
-            docker stop minha-app || true
-            docker rm minha-app || true
-            docker run -d -p 80:4000 -e NODE_ENV=production -e PORT=4000 --name minha-app ${{ secrets.DOCKER_USERNAME }}/minha-app:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/personal-profile:latest
+            docker stop personal-profile || true
+            docker rm personal-profile || true
+            docker run -d -p 80:4000 -e NODE_ENV=production -e PORT=4000 --name personal-profile ${{ secrets.DOCKER_USERNAME }}/personal-profile:latest
