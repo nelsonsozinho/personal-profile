@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, inject } from '@angular/core';
 
 interface CompanyExperience {
   company: string;
@@ -13,6 +14,8 @@ interface CompanyExperience {
   styleUrl: './resume-section.component.sass',
 })
 export class ResumeSectionComponent {
+  private readonly location = inject(Location);
+
   protected readonly title = 'Resume';
   protected readonly summary =
     'Seasoned software developer with deep expertise in the Java ecosystem and AWS cloud technologies. ' +
@@ -85,5 +88,5 @@ export class ResumeSectionComponent {
   ];
 
   protected readonly resumeFileName = 'my Resume';
-  protected readonly resumeUrl = '/assets/resume-english.pdf';
+  protected readonly resumeUrl = this.location.prepareExternalUrl('assets/resume-english.pdf');
 }

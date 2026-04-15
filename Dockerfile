@@ -26,6 +26,9 @@ COPY --from=prod-deps /app/node_modules ./node_modules
 COPY package.json package-lock.json ./
 COPY --from=builder /app/dist ./dist
 
+# Ensure non-root runtime user can read all static/server artifacts.
+RUN chmod -R a+rX /app/dist && chown -R appuser:appuser /app/dist
+
 # Switch to non-root user
 USER appuser
 
@@ -36,4 +39,3 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 EXPOSE 4000
 
 CMD ["npm", "run", "serve:ssr:personal-profile"]
-
