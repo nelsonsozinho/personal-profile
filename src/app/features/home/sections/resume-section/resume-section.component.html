@@ -11,7 +11,7 @@
   </ul>
 
   <div class="resume__actions">
-    <a class="resume__download" [href]="resumeUrl" download>
+    <a class="resume__download" [href]="resumeUrl" download (click)="trackResumeDownload()">
       Download {{ resumeFileName }}
     </a>
   </div>

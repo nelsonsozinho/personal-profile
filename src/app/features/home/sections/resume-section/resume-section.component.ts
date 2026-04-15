@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { AnalyticsService } from '../../../../core/analytics.service';
 
 interface CompanyExperience {
   company: string;
@@ -15,6 +16,7 @@ interface CompanyExperience {
 })
 export class ResumeSectionComponent {
   private readonly location = inject(Location);
+  private readonly analyticsService = inject(AnalyticsService);
 
   protected readonly title = 'Resume';
   protected readonly summary =
@@ -89,4 +91,11 @@ export class ResumeSectionComponent {
 
   protected readonly resumeFileName = 'my Resume';
   protected readonly resumeUrl = this.location.prepareExternalUrl('assets/resume-english.pdf');
+
+  trackResumeDownload(): void {
+    this.analyticsService.trackEvent('download_resume', {
+      file_name: 'resume-english.pdf',
+      timestamp: new Date().toISOString(),
+    });
+  }
 }
