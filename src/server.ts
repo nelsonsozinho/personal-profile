@@ -21,6 +21,14 @@ const angularInlineScriptHashes = [
   "'sha256-8sGKvDKC8crv9OBcqEMvqrNDWlm1/80h7NJpJzqOnLI='",
 ];
 
+const googleAnalyticsScriptSrc = ['https://www.googletagmanager.com'];
+const googleAnalyticsConnectSrc = [
+  'https://www.google-analytics.com',
+  'https://region1.google-analytics.com',
+  'https://www.googletagmanager.com',
+];
+const googleAnalyticsImgSrc = ['https://www.google-analytics.com'];
+
 // Validate required environment variables
 function validateEnvironment(): void {
   if (!['development', 'production', 'staging'].includes(NODE_ENV)) {
@@ -82,13 +90,13 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", ...angularInlineScriptHashes],
+        scriptSrc: ["'self'", ...angularInlineScriptHashes, ...googleAnalyticsScriptSrc],
         // Angular-generated preload stylesheet uses an inline onload attribute.
         scriptSrcAttr: ["'unsafe-inline'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", 'data:', 'https:'],
+        imgSrc: ["'self'", 'data:', 'https:', ...googleAnalyticsImgSrc],
         fontSrc: ["'self'", 'https:'],
-        connectSrc: ["'self'", apiUrl],
+        connectSrc: ["'self'", apiUrl, ...googleAnalyticsConnectSrc],
         frameSrc: ["'none'"],
         objectSrc: ["'none'"],
         // Opt-in only: enabling this over plain HTTP can prevent client scripts from loading.

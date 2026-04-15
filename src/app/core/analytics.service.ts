@@ -1,11 +1,12 @@
-import { Injectable, inject } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Injectable, Injector, PLATFORM_ID, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
+    dataLayer: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -15,10 +16,28 @@ declare global {
  */
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
-  private readonly router = inject(Router);
-  private readonly GA_MEASUREMENT_ID = 'G-WCX7FPWZXS';
+  private readonly document = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
+  private readonly platformId = inject(PLATFORM_ID);
 
-  constructor() {
+  private readonly measurementId = 'G-WCX7FPWZXS';
+  private initialized = false;
+
+  initialize(): void {
+    if (this.initialized || !isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    this.initialized = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = (...args: unknown[]) => {
+      window.dataLayer.push(args);
+    };
+
+    window.gtag('js', new Date());
+    window.gtag('config', this.measurementId, { send_page_view: false });
+
+    this.loadGoogleTagScript();
     this.initializePageTracking();
   }
 
@@ -28,7 +47,7 @@ export class AnalyticsService {
    * @param eventData - Optional event parameters
    */
   trackEvent(eventName: string, eventData?: Record<string, any>): void {
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (isPlatformBrowser(this.platformId) && window.gtag) {
       window.gtag('event', eventName, eventData);
     }
   }
@@ -37,16 +56,41 @@ export class AnalyticsService {
    * Track page views automatically on route changes
    */
   private initializePageTracking(): void {
-    this.router.events
+    const router = this.injector.get(Router);
+
+    this.trackPageView(router.url || this.document.location?.pathname || '/');
+
+    router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'page_view', {
-            page_path: event.urlAfterRedirects,
-            page_title: document.title,
-          });
-        }
+        this.trackPageView(event.urlAfterRedirects);
       });
+  }
+
+  private trackPageView(pagePath: string): void {
+    if (!window.gtag) {
+      return;
+    }
+
+    window.gtag('event', 'page_view', {
+      page_path: pagePath,
+      page_title: this.document.title,
+    });
+  }
+
+  private loadGoogleTagScript(): void {
+    const existingScript = this.document.querySelector<HTMLScriptElement>(
+      `script[src="https://www.googletagmanager.com/gtag/js?id=${this.measurementId}"]`,
+    );
+
+    if (existingScript) {
+      return;
+    }
+
+    const script = this.document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`;
+    this.document.head.appendChild(script);
   }
 }
 
