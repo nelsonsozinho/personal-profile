@@ -3,7 +3,8 @@
  */
 export const environment = {
   production: true,
-  apiUrl: process.env['API_URL'] || 'https://api.example.com',
+  apiUrl: 'https://api.example.com',
+  gaMeasurementId: 'G-WCX7FPWZXS',
   logLevel: 'info',
   enableErrorTracking: true,
   ssrTimeout: 30000,

@@ -2,6 +2,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Injectable, Injector, PLATFORM_ID, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 declare global {
   interface Window {
@@ -20,11 +21,12 @@ export class AnalyticsService {
   private readonly injector = inject(Injector);
   private readonly platformId = inject(PLATFORM_ID);
 
-  private readonly measurementId = 'G-WCX7FPWZXS';
+  private readonly measurementId = environment.gaMeasurementId;
   private initialized = false;
+  private previousPageLocation: string | null = null;
 
   initialize(): void {
-    if (this.initialized || !isPlatformBrowser(this.platformId)) {
+    if (this.initialized || !isPlatformBrowser(this.platformId) || !this.measurementId) {
       return;
     }
 
@@ -72,10 +74,18 @@ export class AnalyticsService {
       return;
     }
 
+    const origin = this.document.location?.origin ?? '';
+    const pageLocation = `${origin}${pagePath}`;
+    const pageReferrer = this.previousPageLocation || this.document.referrer || undefined;
+
     window.gtag('event', 'page_view', {
       page_path: pagePath,
       page_title: this.document.title,
+      page_location: pageLocation,
+      page_referrer: pageReferrer,
     });
+
+    this.previousPageLocation = pageLocation;
   }
 
   private loadGoogleTagScript(): void {

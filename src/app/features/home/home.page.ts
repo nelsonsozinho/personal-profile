@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
 
   private updatePageMetadata(): void {
     this.seoService.updateMetadata({
-      title: 'Nelson Sozinho - Full Stack Developer & Software Engineer',
+      title: 'Nelson Sozinho - Backend Developer & Software Engineer',
       description:
         'Experienced software developer specializing in Java, Spring Boot, AWS, and modern web technologies. Seasoned backend engineer with expertise in microservices, event-driven architecture, and cloud-native development.',
       keywords: 'Java, Spring Boot, AWS, Backend Engineer, Full Stack Developer, Microservices, Angular',
