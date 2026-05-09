@@ -1,0 +1,14 @@
+services:
+  personal-profile:
+    container_name: personal-profile
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nelsonsozinho/personal-profile:latest
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+
